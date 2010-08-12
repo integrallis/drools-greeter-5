@@ -1,0 +1,8 @@
+package org.integrallis.greeting
+
+rule "GreetingGoodMorning"
+	when
+		TimeOfDay(hour < 12)
+	then 
+		System.out.print("Good Morning, ");
+end
