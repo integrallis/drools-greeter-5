@@ -41,16 +41,16 @@ public class GreetingExample {
 			KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(knowledgeSession, "test");
 			
 			// 4 - create and assert some facts
-			TimeOfDay nineAm = new TimeOfDay(9, 0);
-			
 			Person stephenFalken = new Person("Stephen Falken", MALE, 48, SINGLE, PHD);
 			Person richie = new Person("Richie Rich", MALE, 9, SINGLE, NONE);
 			Person marieCurie = new Person("Marie Curie", FEMALE, 45, MARRIED, PHD);
+			
+			TimeOfDay nineAm = new TimeOfDay(9, 0);
 
-			knowledgeSession.insert(nineAm);
 			knowledgeSession.insert(marieCurie);
 			knowledgeSession.insert(stephenFalken);
 			knowledgeSession.insert(richie);
+			knowledgeSession.insert(nineAm);
 		
 			// 5 - fire the rules
 			knowledgeSession.fireAllRules();

@@ -6,3 +6,31 @@ rule "GreetingGoodMorning"
 	then 
 		System.out.print("Good Morning, ");
 end
+
+rule "GreetingGoodAfternoon"
+	when
+		TimeOfDay(hour >= 12, hour <= 17)
+	then 
+		System.out.print("Good Afternoon, ");	
+end
+
+rule "GreetingGoodEvening"
+	when
+		TimeOfDay(hour >= 18, hour <= 22)
+	then 
+		System.out.println("Good Evening, ");	
+end
+
+rule "GreetingGoodNight"
+	when
+		TimeOfDay(hour >= 23, hour <= 24)
+	then 
+		System.out.print("Good Night, ");	
+end
+
+rule "Person"
+	when
+		person:Person()
+	then 
+		System.out.print(person.getName() + " ");	
+end

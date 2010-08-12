@@ -4,3 +4,5 @@
 */target/*
 *.class
 target
+bin
+*.log
