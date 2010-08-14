@@ -1,5 +1,12 @@
 package org.integrallis.greeting;
 
+import static org.integrallis.greeting.Person.Education.NONE;
+import static org.integrallis.greeting.Person.Education.PHD;
+import static org.integrallis.greeting.Person.Gender.FEMALE;
+import static org.integrallis.greeting.Person.Gender.MALE;
+import static org.integrallis.greeting.Person.MaritalStatus.MARRIED;
+import static org.integrallis.greeting.Person.MaritalStatus.SINGLE;
+
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
@@ -11,10 +18,6 @@ import org.drools.io.ResourceFactory;
 import org.drools.logger.KnowledgeRuntimeLogger;
 import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
-
-import static org.integrallis.greeting.Person.Education.*;
-import static org.integrallis.greeting.Person.Gender.*;
-import static org.integrallis.greeting.Person.MaritalStatus.*;
 
 public class GreetingExample {
 

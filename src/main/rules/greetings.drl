@@ -1,5 +1,13 @@
 package org.integrallis.greeting
 
+import org.integrallis.greeting.Person.Education;
+import org.integrallis.greeting.Person.Gender;
+import org.integrallis.greeting.Person.MaritalStatus;
+
+/**
+ * Greeting Rules
+ */
+ 
 rule "GreetingGoodMorning"
 	when
 		TimeOfDay(hour < 12)
@@ -28,9 +36,42 @@ rule "GreetingGoodNight"
 		System.out.print("Good Night, ");	
 end
 
-rule "Person"
+/**
+ * Salutation Rules
+ */
+
+rule "SalutationMrs"
 	when
-		person:Person()
+		person:Person(personName: name, gender == Gender.FEMALE, maritalStatus == MaritalStatus.MARRIED, education != Education.PHD)
 	then 
-		System.out.print(person.getName() + " ");	
+		System.out.println("Mrs. " + personName);	
 end
+
+rule "SalutationMs"
+	when
+		person:Person(personName: name, gender == Gender.FEMALE, maritalStatus == MaritalStatus.SINGLE, education != Education.PHD)
+	then 
+		System.out.println("Ms. " + personName);	
+end
+
+rule "SalutationMr"
+	when
+		person:Person(personName: name, gender == Gender.MALE, education < Education.PHD, age > 10)
+	then 
+		System.out.println("Mr. " + personName);	
+end
+
+rule "SalutationDr"
+	when
+		person:Person(personName: name, education >= Education.PHD)
+	then 
+		System.out.println("Dr. " + personName);	
+end
+
+rule "SalutationLittle"
+	when
+		person:Person(personName: name, gender == Gender.MALE, maritalStatus == MaritalStatus.SINGLE, age <= 10)
+	then 
+		System.out.println("Little " + personName);	
+end
+
