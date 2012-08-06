@@ -13,7 +13,6 @@ rule "GreetingGoodMorning"
 		TimeOfDay(hour < 12)
 		person:Person()
 	then 
-		System.out.print("Good Morning, ");
 		Greeting greeting = new Greeting();
 		greeting.setGreeting("Good Morning");
 		greeting.setPerson(person);
@@ -24,8 +23,7 @@ rule "GreetingGoodAfternoon"
 	when
 		TimeOfDay(hour >= 12, hour <= 17)
 		person:Person()
-	then 
-		System.out.print("Good Afternoon, ");	
+	then 	
 		Greeting greeting = new Greeting();
 		greeting.setGreeting("Good Afternoon");
 		greeting.setPerson(person);
@@ -36,8 +34,7 @@ rule "GreetingGoodEvening"
 	when
 		TimeOfDay(hour >= 18, hour <= 22)
 		person:Person()
-	then 
-		System.out.println("Good Evening, ");	
+	then 	
 		Greeting greeting = new Greeting();
 		greeting.setGreeting("Good Evening");
 		greeting.setPerson(person);
@@ -48,8 +45,7 @@ rule "GreetingGoodNight"
 	when
 		TimeOfDay(hour >= 23, hour <= 24)
 		person:Person()
-	then 
-		System.out.print("Good Night, ");	
+	then 	
 		Greeting greeting = new Greeting();
 		greeting.setGreeting("Good Night");
 		greeting.setPerson(person);
@@ -63,46 +59,54 @@ end
 rule "SalutationMrs"
 	when
 		person:Person(personName: name, gender == Gender.FEMALE, maritalStatus == MaritalStatus.MARRIED, education != Education.PHD)
-		greeting:Greeting(person == person)
+		greeting:Greeting(person == person, salutation == null)
 	then 
-		System.out.println("Mrs. " + personName);	
 		greeting.setSalutation("Mrs.");
+		update(greeting);
 end
 
 rule "SalutationMs"
 	when
 		person:Person(personName: name, gender == Gender.FEMALE, maritalStatus == MaritalStatus.SINGLE, education != Education.PHD)
-		greeting:Greeting(person == person)
-	then 
-		System.out.println("Ms. " + personName);	
+		greeting:Greeting(person == person, salutation == null)
+	then 	
 		greeting.setSalutation("Ms.");
+		update(greeting);
 end
 
 rule "SalutationMr"
 	when
 		person:Person(personName: name, gender == Gender.MALE, education < Education.PHD, age > 10)
-		greeting:Greeting(person == person)
+		greeting:Greeting(person == person, salutation == null)
 	then 
-		System.out.println("Mr. " + personName);
-		greeting.setSalutation("Mr.");	
+		greeting.setSalutation("Mr.");
+		update(greeting);	
 end
 
 rule "SalutationDr"
 	when
 		person:Person(personName: name, education >= Education.PHD)
-		greeting:Greeting(person == person)
-	then 
-		System.out.println("Dr. " + personName);	
+		greeting:Greeting(person == person, salutation == null)
+	then 	
 		greeting.setSalutation("Dr.");
+		update(greeting);
 end
 
 rule "SalutationLittle"
 	when
 		person:Person(personName: name, gender == Gender.MALE, maritalStatus == MaritalStatus.SINGLE, age <= 10)
-		greeting:Greeting(person == person)
+		greeting:Greeting(person == person, salutation == null)
 	then 
-		System.out.println("Little " + personName);	
 		greeting.setSalutation("Little");
+		update(greeting);
+end
+
+rule "PrintAll"
+    enabled true
+	when
+	    greeting: Greeting(salutation != null, greeting != null);
+	then
+	    System.out.println(greeting.greet());
 end
 
 query "GetAllGreetings"
