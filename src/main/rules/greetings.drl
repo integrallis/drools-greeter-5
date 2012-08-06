@@ -102,7 +102,7 @@ rule "SalutationLittle"
 end
 
 rule "PrintAll"
-    enabled true
+    enabled false
 	when
 	    greeting: Greeting(salutation != null, greeting != null);
 	then
