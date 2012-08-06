@@ -18,6 +18,8 @@ import org.drools.io.ResourceFactory;
 import org.drools.logger.KnowledgeRuntimeLogger;
 import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.rule.QueryResults;
+import org.drools.runtime.rule.QueryResultsRow;
 
 public class GreetingExample {
 
@@ -57,6 +59,16 @@ public class GreetingExample {
 		
 			// 5 - fire the rules
 			knowledgeSession.fireAllRules();
+			
+			// 6 - query for results
+			QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetings" );
+
+			System.out.println( "There are " + results.size() + " greetings" );
+
+			for ( QueryResultsRow row : results ) {
+			    Greeting greeting = (Greeting) row.get( "greeting" );
+			    System.out.println( greeting.greet() );
+			}
 			
 			logger.close();
 		} catch (Throwable t) {
