@@ -13,4 +13,9 @@ public class Greeting {
     public String getGreeting() { return greeting; }
     
     public String greet() { return greeting + ", " + salutation + " " + person.getName(); }
+    
+    @Override
+    public String toString() {
+    	return greet();
+    }
 }
