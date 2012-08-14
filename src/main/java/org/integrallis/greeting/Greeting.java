@@ -16,6 +16,6 @@ public class Greeting {
     
     @Override
     public String toString() {
-    	return greet();
+    		return greet();
     }
 }
