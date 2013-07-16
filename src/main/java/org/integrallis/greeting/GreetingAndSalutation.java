@@ -1,6 +1,6 @@
 package org.integrallis.greeting;
 
-public class Greeting {
+public class GreetingAndSalutation {
 	private Person person;
     private String greeting;
     private String salutation;
@@ -12,10 +12,14 @@ public class Greeting {
 	public void setGreeting(String greeting) { this.greeting = greeting; }
     public String getGreeting() { return greeting; }
     
-    public String greet() { return greeting + ", " + salutation + " " + person.getName(); }
+    public String greetAndSalute() { return greeting + ", " + salutation + " " + person.getName(); }
+    
+    public boolean isComplete() {
+    	return (greeting != null && salutation != null);
+    }
     
     @Override
     public String toString() {
-    		return greet();
+    		return greetAndSalute();
     }
 }

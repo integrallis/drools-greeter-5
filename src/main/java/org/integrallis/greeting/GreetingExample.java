@@ -2,6 +2,7 @@ package org.integrallis.greeting;
 
 import static org.integrallis.greeting.Person.Education.NONE;
 import static org.integrallis.greeting.Person.Education.PHD;
+import static org.integrallis.greeting.Person.Education.DROPOUT;
 import static org.integrallis.greeting.Person.Gender.FEMALE;
 import static org.integrallis.greeting.Person.Gender.MALE;
 import static org.integrallis.greeting.Person.MaritalStatus.MARRIED;
@@ -46,7 +47,7 @@ public class GreetingExample {
 			KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(knowledgeSession, "test");
 			
 			// 4 - create and assert some facts
-			Person stephenFalken = new Person("Stephen Falken", MALE, 48, SINGLE, PHD);
+			Person stephenFalken = new Person("Stephen Falken", MALE, 48, SINGLE, DROPOUT);
 			Person richie = new Person("Richie Rich", MALE, 9, SINGLE, NONE);
 			Person marieCurie = new Person("Marie Curie", FEMALE, 45, MARRIED, PHD);
 			
@@ -61,13 +62,13 @@ public class GreetingExample {
 			knowledgeSession.fireAllRules();
 			
 			// 6 - query for results
-			QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetings" );
+			QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingAndSalutations" );
 
 			System.out.println( "There are " + results.size() + " greetings" );
 
 			for ( QueryResultsRow row : results ) {
-			    Greeting greeting = (Greeting) row.get( "greeting" );
-			    System.out.println( greeting.greet() );
+			    GreetingAndSalutation greeting = (GreetingAndSalutation) row.get( "greeting" );
+			    System.out.println( greeting.greetAndSalute() );
 			}
 			
 			logger.close();
